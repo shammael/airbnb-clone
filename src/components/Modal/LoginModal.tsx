@@ -8,12 +8,12 @@ import Input from "../Input ";
 import { toast } from "react-hot-toast";
 import * as yup from "yup";
 import Button from "../Button";
-import { FcGoogle } from "react-icons/fc";
-import { AiFillGithub } from "react-icons/ai";
 import useLoginModal from "../hooks/useLoginModal";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import useRegisterModal from "../hooks/useRegisterModal";
+import GoogleIcon from "@/icons/Google.icon";
+import GithubIcon from "@/icons/Github.icon";
 
 const LoginModal = () => {
   const { isOpen: isOpenLogin, onClose: onCloseLogin } = useLoginModal();
@@ -87,13 +87,13 @@ const LoginModal = () => {
       <Button
         outline
         label="Continue with Google"
-        icon={FcGoogle}
+        icon={{ element: GoogleIcon, properties: { viewBox: "0 0 600 600" } }}
         onClick={() => signIn("google")}
       />
       <Button
         outline
         label="Continue with Github"
-        icon={AiFillGithub}
+        icon={{ element: GithubIcon, properties: {} }}
         onClick={() => signIn("github")}
       />
       <div className="text-neutral-500 justify-center mt-4">

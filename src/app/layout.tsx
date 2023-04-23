@@ -8,8 +8,9 @@ import Navbar from "@/components/Navbar/Navbar";
 import { SessionProvider } from "next-auth/react";
 import getCurentUser from "@/actions/getCurrentUser";
 import RentModal from "@/components/Modal/RentModal";
+import { Metadata } from "next";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Airbnb",
   description: "Airbnb clone",
 };

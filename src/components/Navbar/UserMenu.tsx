@@ -1,6 +1,5 @@
 "use client";
 import { lazy, useCallback, useState } from "react";
-import { AiOutlineMenu } from "react-icons/ai";
 import Avatar from "../Avatar";
 import useLoginModal from "../hooks/useLoginModal";
 import useRegisterModal from "../hooks/useRegisterModal";
@@ -8,6 +7,7 @@ import MenuItem from "./MenuItem";
 import { signOut } from "next-auth/react";
 import TUser from "@/interfaces/user.interface";
 import useRentModal from "../hooks/useRentModal";
+import MenuIcon from "@/icons/Menu.icon";
 
 interface Props {
   currentUser?: TUser | null;
@@ -44,7 +44,7 @@ const UserMenu = ({ currentUser }: Props) => {
           onClick={toggleOpen}
           className="p-4 md:py-1 md:px-2 border-[1px] border-neutral-100 flex flex-row items-center gap-3 rounded-full cursor-pointer hover:shadow-md transition"
         >
-          <AiOutlineMenu />
+          <MenuIcon className="h-[18px] w-[18px]" />
           <div className="hidden md:block">
             <Avatar imageUrl={currentUser?.image} />
           </div>

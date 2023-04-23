@@ -2,10 +2,10 @@
 
 import TUser from "@/interfaces/user.interface";
 import Container from "../Container";
-import Categories from "./Categories";
 import Logo from "./Logo";
 import Search from "./Search";
 import UserMenu from "./UserMenu";
+import Categories from "@/components/Category/Categories";
 
 interface Props {
   currentUser?: TUser | null;

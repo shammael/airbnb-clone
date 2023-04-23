@@ -1,7 +1,6 @@
 "use client";
 
-import React, { ButtonHTMLAttributes, HTMLAttributes } from "react";
-import { IconType } from "react-icons/lib/esm/iconBase";
+import React, { SVGProps } from "react";
 
 interface Props {
   label: string;
@@ -9,7 +8,10 @@ interface Props {
   disabled?: boolean;
   outline?: boolean;
   small?: boolean;
-  icon?: IconType;
+  icon?: {
+    element: React.FC<SVGProps<SVGSVGElement>>;
+    properties: SVGProps<SVGSVGElement>;
+  };
   type?: "button" | "reset" | "submit";
 }
 
@@ -17,11 +19,15 @@ const Button = ({
   label,
   onClick,
   disabled,
-  icon: Icon,
+  icon,
   outline,
   small,
   type,
 }: Props) => {
+  let Icon;
+  if (icon) {
+    Icon = icon.element;
+  }
   return (
     <button
       onClick={onClick}
@@ -37,7 +43,12 @@ const Button = ({
           : "border-2 py-3 text-md font-semibold"
       }`}
     >
-      {Icon && <Icon size={24} className="absolute left-4 top-3" />}
+      {Icon && (
+        <Icon
+          {...icon?.properties}
+          className="absolute left-4 top-3 w-[20px] h-[20px]"
+        />
+      )}
       {label}
     </button>
   );

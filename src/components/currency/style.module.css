@@ -1,0 +1,10 @@
+.currency div {
+  border: none !important;
+  border-width: 0 !important;
+}
+
+.currency {
+  width: 150px;
+  outline: none;
+  border: none;
+}

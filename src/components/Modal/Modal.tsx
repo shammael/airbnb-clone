@@ -1,8 +1,8 @@
 "use client";
 
+import CloseIcon from "@/icons/Close.icon";
 import { ReactElement, useCallback, useEffect, useState } from "react";
 
-import { IoMdClose } from "react-icons/io";
 import Button from "../Button";
 
 interface Props {
@@ -84,7 +84,10 @@ const Modal = ({
                   className="p-1 border-0 hover:opacity-70 transition absolute left-9"
                   onClick={handleClose}
                 >
-                  <IoMdClose />
+                  <CloseIcon
+                    viewBox="0 0 600 600"
+                    className="h-[18px] w-[18px] fill-neutral-500"
+                  />
                 </button>
                 <div className="text-lg font-semibold">{title}</div>
               </div>

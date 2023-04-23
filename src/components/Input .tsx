@@ -1,7 +1,7 @@
 "use client";
 
+import DollarIcon from "@/icons/Dolar.icon";
 import React, { InputHTMLAttributes } from "react";
-import { BiDollar } from "react-icons/bi";
 
 interface Props
   extends Pick<
@@ -26,12 +26,9 @@ const Input = ({
   onBlur,
 }: Props) => {
   return (
-    <div className="w-full relative mt-3">
+    <div className="w-full relative mt-3 flex justify-center items-center">
       {formatPrice && (
-        <BiDollar
-          size={24}
-          className="text-neutral-700 absolute top-5 left-2"
-        />
+        <DollarIcon className="h-10 w-10 text-neutral-500 absolute top-5 left-2" />
       )}
       <input
         name={name}
@@ -41,7 +38,7 @@ const Input = ({
         disabled={disabled}
         id={id}
         placeholder={placeholder}
-        className={`peer w-ful p-4 pt-3 text-lg text-neutral-600 bg-white border-2 rounded-md outline-none transition disabled:opacity-70 disabled:cursor-not-allowed w-full ${
+        className={`peer p-4 pt-3 text-lg text-neutral-600 bg-white border-2 rounded-md outline-none transition disabled:opacity-70 disabled:cursor-not-allowed w-full my-auto ${
           formatPrice ? "pl-9" : "pl-4"
         } ${
           error

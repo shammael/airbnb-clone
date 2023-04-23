@@ -1,13 +1,14 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
-import { IconType } from "react-icons";
 import qs from "query-string";
+import Image from "next/image";
+import BeachIcon from "@/components/Category/icons/Beach";
 
 interface Props {
   label: string;
   description: string;
-  icon: IconType;
+  icon: any;
   selected?: boolean;
 }
 
@@ -50,7 +51,12 @@ const CategoryBox = ({ description, icon: Icon, label, selected }: Props) => {
           : "border-transparent text-neutral-500"
       }`}
     >
-      <Icon size={26} />
+      <Icon
+        width={30}
+        height={30}
+        className="fill-neutral-600 font-bold"
+        // color="rgb(115 115 115 / var(--tw-text-opacity))"
+      />
       <div className="font-medium text-sm">{label}</div>
     </div>
   );
