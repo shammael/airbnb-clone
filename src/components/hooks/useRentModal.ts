@@ -1,12 +1,12 @@
 import { create } from "zustand";
 
-interface RentModelStore {
+export interface RentModalStore {
   isOpen: boolean;
   open: () => void;
   close: () => void;
 }
 
-const useRentModal = create<RentModelStore>((set) => ({
+const useRentModal = create<RentModalStore>((set) => ({
   isOpen: false,
   close: () => set({ isOpen: false }),
   open: () => set({ isOpen: true }),

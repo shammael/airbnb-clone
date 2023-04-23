@@ -29,7 +29,7 @@ const ImageUpload = ({ onChange, value }: Props) => {
               className="relative cursor-pointer hover:opacity-70 transition border-dashed border-2 p-20 border-neutral-300 flex flex-col justify-center items-center gap-4 text-neutral-600"
               onClick={() => open?.()}
             >
-              <PhotoAddIcon className="h-10 w-10" />
+              <PhotoAddIcon className="h-10 w-10 fill-neutral-700" />
               <div className="font-semiold text-lg">Click to upload</div>
               {value && (
                 <div className=" absolute inset-0 w-full h-full">

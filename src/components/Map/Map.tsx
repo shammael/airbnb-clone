@@ -23,9 +23,12 @@ interface Props {
 }
 
 const Map = ({ location, onClick }: Props) => {
+  console.log({ location });
   const [position, setPosition] = useState<[number, number]>(
     (location?.latlng as [number, number]) || [11.404083, -69.679017]
   );
+
+  console.log({ position });
 
   useEffect(() => {
     if (location?.latlng) {
@@ -34,18 +37,20 @@ const Map = ({ location, onClick }: Props) => {
   }, [location?.latlng]);
 
   useEffect(() => {
-    getUserLocation().then((re) => {
-      setPosition(re);
-      getCountry(re).then((res) => {
-        onClick({
-          latlng: re,
-          country: res.results[0].components.country,
-          countryCode: res.results[0].components.countryCode,
-          continent: res.results[0].components.continent,
-          flag: res.results[0].annotations.flag,
+    if (!location?.latlng) {
+      getUserLocation().then((re) => {
+        setPosition(re);
+        getCountry(re).then((res) => {
+          onClick({
+            latlng: re,
+            country: res.results[0].components.country,
+            countryCode: res.results[0].components.countryCode,
+            continent: res.results[0].components.continent,
+            flag: res.results[0].annotations.flag,
+          });
         });
       });
-    });
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

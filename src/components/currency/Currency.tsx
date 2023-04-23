@@ -1,5 +1,3 @@
-import { IconType } from "react-icons";
-import { BiDollar, BiEuro } from "react-icons/bi";
 import Select from "react-select";
 import styles from "./style.module.css";
 import CurrencyFormat from "react-currency-format";
@@ -7,7 +5,7 @@ import { useState } from "react";
 
 const supportedCurrency: { label: string; value: string }[] = [
   {
-    label: "$",
+    label: "USD",
     value: "US Dollar",
   },
   {
@@ -23,7 +21,7 @@ const supportedCurrency: { label: string; value: string }[] = [
 interface Props {
   onChange: (value: {
     currency: { value: string; label: string };
-    price: number;
+    price: string;
   }) => void;
   exchange: {
     value: { value: string; label: string };
@@ -32,7 +30,9 @@ interface Props {
 }
 
 const Currency = ({ exchange, onChange }: Props) => {
-  const [currency, setCurrency] = useState({ value: "US Dollar", label: "$" });
+  const [currency, setCurrency] = useState<{ value: string; label: string }>(
+    { ...exchange.value } || { value: "US Dollar", label: "USD" }
+  );
   return (
     <div className="flex flex-col">
       <label
@@ -45,7 +45,7 @@ const Currency = ({ exchange, onChange }: Props) => {
         <Select
           options={supportedCurrency}
           className={styles.currency}
-          defaultValue={{ value: "US Dollar", label: "$" }}
+          defaultValue={{ value: "US Dollar", label: "USD" }}
           onChange={(value) =>
             setCurrency({
               label: value?.label as string,
@@ -54,7 +54,6 @@ const Currency = ({ exchange, onChange }: Props) => {
           }
           value={currency}
         />
-        {/* <input className="w-full text-end outline-none flex justify-end items-end px-2" /> */}
         <CurrencyFormat
           className="w-full text-end outline-none flex justify-end items-end px-2"
           thousandSeparator={true}

@@ -17,7 +17,6 @@ interface Props {
 
 const CountrySelect = ({ onChange, value }: Props) => {
   const { getAll } = useCountries();
-  console.log({ value });
   return (
     <div>
       <Select

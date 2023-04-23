@@ -7,7 +7,7 @@ import ToasterProvider from "@/components/Providers/ToasterProvider";
 import Navbar from "@/components/Navbar/Navbar";
 import { SessionProvider } from "next-auth/react";
 import getCurentUser from "@/actions/getCurrentUser";
-import RentModal from "@/components/Modal/RentModal";
+import RentModal from "@/components/RentModal/RentModal";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

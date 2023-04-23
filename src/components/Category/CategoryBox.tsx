@@ -2,8 +2,6 @@
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 import qs from "query-string";
-import Image from "next/image";
-import BeachIcon from "@/components/Category/icons/Beach";
 
 interface Props {
   label: string;
