@@ -3,10 +3,7 @@ import Heading from "../Heading";
 import CommonProps from "./interface/CommonProps";
 
 interface Props
-  extends CommonProps<
-    "exchange",
-    { currency: { value: string; label: string }; price: string }
-  > {}
+  extends CommonProps<"exchange", { currency: string; price: number }> {}
 
 const Price = ({ onChange, values }: Props) => {
   return (
@@ -17,7 +14,7 @@ const Price = ({ onChange, values }: Props) => {
       />
       <Currency
         exchange={{
-          value: values.exchange.currency,
+          currency: values.exchange.currency,
           price: values.exchange.price,
         }}
         onChange={(value) =>

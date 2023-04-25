@@ -9,9 +9,7 @@ interface Props {
 }
 
 const LocationMarker = ({ onClick, location }: Props) => {
-  const [position, setPosition] = useState<[number, number]>([
-    26.602569565623845, -81.0353697518301,
-  ]);
+  const [position, setPosition] = useState<[number, number]>(location);
   const map = useMapEvents({
     async click(e) {
       const res = await getCountry([e.latlng.lat, e.latlng.lng]);
@@ -26,7 +24,7 @@ const LocationMarker = ({ onClick, location }: Props) => {
       onClick({
         latlng: [e.latlng.lat, e.latlng.lng],
         country: res.results[0].components.country,
-        countryCode: res.results[0].components.countryCode,
+        countryCode: res.results[0].components.country_code,
         continent: res.results[0].components.continent,
         flag: res.results[0].annotations.flag,
       });

@@ -69,7 +69,7 @@ const RentModal = () => {
       <DescriptionModal
         isLoading={isLoading}
         onChange={(property, value) => setCustomValue(property, value)}
-        values={{ description: values.description }}
+        values={{ presentation: values.presentation }}
       />
     );
   }
@@ -77,7 +77,9 @@ const RentModal = () => {
   if (step === STEPS.PRICE) {
     bodyContent = (
       <Price
-        onChange={(property, value) => setCustomValue(property, value)}
+        onChange={(property, value) => {
+          setCustomValue(property, value);
+        }}
         values={{ exchange: values.exchange }}
       />
     );

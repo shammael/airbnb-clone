@@ -6,7 +6,7 @@ const getUserLocation = (): Promise<[number, number]> => {
       },
       (err) => {
         alert(err.message);
-        reject(err.message);
+        reject([37.77171598272512, -122.40537690432976]);
       }
     );
   });

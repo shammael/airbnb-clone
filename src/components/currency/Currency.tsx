@@ -19,20 +19,26 @@ const supportedCurrency: { label: string; value: string }[] = [
 ];
 
 interface Props {
-  onChange: (value: {
-    currency: { value: string; label: string };
-    price: string;
-  }) => void;
+  onChange: (value: { currency: string; price: number }) => void;
   exchange: {
-    value: { value: string; label: string };
-    price: string;
+    currency: string;
+    price: number;
   };
 }
 
 const Currency = ({ exchange, onChange }: Props) => {
-  const [currency, setCurrency] = useState<{ value: string; label: string }>(
-    { ...exchange.value } || { value: "US Dollar", label: "USD" }
+  const [transaction, setTransaction] = useState<{
+    currency: string;
+    price: number;
+  }>(
+    exchange
+      ? exchange
+      : {
+          currency: "USD",
+          price: 0.0,
+        }
   );
+
   return (
     <div className="flex flex-col">
       <label
@@ -45,23 +51,36 @@ const Currency = ({ exchange, onChange }: Props) => {
         <Select
           options={supportedCurrency}
           className={styles.currency}
-          defaultValue={{ value: "US Dollar", label: "USD" }}
-          onChange={(value) =>
-            setCurrency({
-              label: value?.label as string,
-              value: value?.value as string,
-            })
-          }
-          value={currency}
+          defaultValue={supportedCurrency.find(
+            (curr) => curr.label === transaction.currency
+          )}
+          onChange={(value) => {
+            onChange({
+              currency: value!.label,
+              price: transaction.price,
+            });
+            setTransaction({
+              currency: value!.label,
+              price: parseFloat(transaction.price.toFixed(2)),
+            });
+          }}
+          value={supportedCurrency.find(
+            (curr) => curr.label === transaction.currency
+          )}
         />
         <CurrencyFormat
           className="w-full text-end outline-none flex justify-end items-end px-2"
           thousandSeparator={true}
           allowNegative={false}
           fixedDecimalScale={true}
-          onChange={(value: any) =>
-            onChange({ currency, price: value.target.value })
-          }
+          onChange={(e: any) => {
+            setTransaction({ ...transaction, price: e.target.value });
+            onChange({
+              ...transaction,
+              price: e.target.value,
+            });
+          }}
+          value={exchange.price}
         />
       </div>
     </div>

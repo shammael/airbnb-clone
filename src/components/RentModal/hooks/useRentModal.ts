@@ -1,9 +1,10 @@
-import useRentModal, { RentModalStore } from "@/components/hooks/useRentModal";
+import { RentModalStore } from "@/components/hooks/useRentModal";
 import axios from "axios";
 import { useFormik } from "formik";
 import { useRouter } from "next/navigation";
 import { useCallback, useMemo, useState } from "react";
 import toast from "react-hot-toast";
+import { Listing } from "../interface/listing";
 
 type Location = {
   flag: string;
@@ -27,49 +28,54 @@ const useCustomRentModal = (modalStore: RentModalStore) => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  const formik = useFormik<{
-    category: string;
-    location: Location;
-    guestCount: number;
-    roomCount: number;
-    bathroomCount: number;
-    imageSrc: string;
-    exchange: {
-      currency: { value: string; label: string };
-      price: string;
-    };
-    description: string;
-  }>({
+  const formik = useFormik<Listing>({
     initialValues: {
       category: "",
-      location: null,
+      location: [0, 0],
       guestCount: 1,
       roomCount: 1,
       bathroomCount: 0,
       imageSrc: "",
       exchange: {
-        currency: { value: "US Dollar", label: "$" },
-        price: "0.00",
+        currency: "USD",
+        price: 0.0,
       },
-      description: "",
+      presentation: {
+        description: "",
+        title: "",
+      },
     },
     onSubmit: (values, actions) => {
       if (step !== STEPS.PRICE) {
         return onNext();
       }
       setIsLoading(true);
-      axios
-        .post("/api/listings", values)
-        .then((resp) => {
-          toast.success("Listing created");
-          router.refresh();
-          actions.resetForm();
-          setStep(STEPS.CATEGORY);
-          modalStore.close();
-        })
-        .catch((err) => {
-          toast.error("An error have been occured");
-        });
+      console.log({ values });
+      // axios
+      //   .post("/api/listings", {
+      //     category: values.category,
+      //     location: values.location,
+      //     imageSrc: values.imageSrc,
+      //     guestCount: values.guestCount,
+      //     roomCount: values.roomCount,
+      //     bathroomCount: values.bathroomCount,
+      //     exchange: {
+      //       currency: values.exchange.currency,
+      //       price: values.exchange.price,
+      //     },
+      //     info: values.info,
+      //   })
+      //   .then((resp) => {
+      //     toast.success("Listing created");
+      //     router.refresh();
+      //     actions.resetForm();
+      //     setStep(STEPS.CATEGORY);
+      //     modalStore.close();
+      //   })
+      //   .catch((err) => {
+      //     toast.error("An error have been occured");
+      //   });
+      setIsLoading(false);
     },
   });
 
@@ -81,7 +87,7 @@ const useCustomRentModal = (modalStore: RentModalStore) => {
       | "roomCount"
       | "bathroomCount"
       | "imageSrc"
-      | "description"
+      | "presentation"
       | "exchange",
     value: any
   ) => {

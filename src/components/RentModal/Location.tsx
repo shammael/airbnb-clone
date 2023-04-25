@@ -2,20 +2,23 @@ import { lazy } from "react";
 import CountrySelect from "../CountrySelect";
 import Heading from "../Heading";
 import CommonProps from "./interface/CommonProps";
+import useLocation from "./hooks/useLocation";
 
-export type Location = {
+interface Props extends CommonProps<"location", [number, number] | null> {}
+
+export interface LocationData {
+  latlng?: [number, number];
+  country: string;
+  countryCode: string;
+  continent: string;
   flag: string;
-  label: string;
-  latlng: [number, number];
-  region: string;
-  value?: string;
-} | null;
-
-interface Props extends CommonProps<"location", Location> {}
+}
 
 const Map = lazy(() => import("../Map/Map"));
 
 const LocationInfo = ({ onChange, values }: Props) => {
+  const { location, setLocation } = useLocation(values.location);
+
   return (
     <div className="flex flex-col gap-8">
       <Heading
@@ -23,31 +26,34 @@ const LocationInfo = ({ onChange, values }: Props) => {
         subtitle="Help guest find you"
       />
       <CountrySelect
-        value={values.location}
-        onChange={(value) =>
-          onChange("location", {
-            flag: value.flag,
-            label: value.label,
-            latlng: value.latlng as [number, number],
-            region: value.region,
-          })
-        }
+        value={location}
+        onChange={(value) => {
+          setLocation({
+            flag: value.flag as string,
+            continent: value.continent as string,
+            country: value.country as string,
+            countryCode: value.countryCode,
+            latlng: value.latlng,
+          });
+        }}
       />
       <Map
         onClick={(value) => {
-          onChange("location", {
+          onChange("location", value.latlng as [number, number]);
+          setLocation({
+            continent: value.continent as string,
+            country: value.country as string,
+            countryCode: value.countryCode as string,
             flag: value.flag as string,
-            label: value.country as string,
-            latlng: value.latlng as [number, number],
-            region: value.continent as string,
+            latlng: value.latlng,
           });
         }}
         location={{
-          continent: values.location?.region,
-          country: values.location?.label,
-          countryCode: values.location?.value,
-          flag: values.location?.flag,
-          latlng: values.location?.latlng,
+          continent: location?.continent,
+          country: location?.country,
+          countryCode: location?.countryCode,
+          flag: location?.flag,
+          latlng: location?.latlng,
         }}
       />
     </div>
