@@ -21,7 +21,6 @@ const font = Nunito({
 
 export default async function RootLayout({
   children,
-  session,
 }: {
   children: React.ReactNode;
   session: any;
@@ -36,7 +35,7 @@ export default async function RootLayout({
         <LoginModal />
         <RegisterModal />
         {/* <ClientOnly></ClientOnly> */}
-        {children}
+        <div className="pb-20 pt-28">{children}</div>
       </body>
     </html>
   );

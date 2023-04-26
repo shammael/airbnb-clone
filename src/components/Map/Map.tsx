@@ -6,10 +6,8 @@ import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
 import { useEffect, useState } from "react";
-import getUserLocation from "@/helpers/getUserLocation";
 import LocationMarker from "./LocationMarker";
 import { MapData } from "./types";
-import getCountry from "@/utils/getCountry";
 
 leaflet.Icon.Default.mergeOptions({
   iconUrl: markerIcon.src,
@@ -23,12 +21,9 @@ interface Props {
 }
 
 const Map = ({ location, onClick }: Props) => {
-  console.log({ location });
   const [position, setPosition] = useState<[number, number]>(
     (location?.latlng as [number, number]) || [11.404083, -69.679017]
   );
-
-  console.log({ position });
 
   useEffect(() => {
     if (location?.latlng) {

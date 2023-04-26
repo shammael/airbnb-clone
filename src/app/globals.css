@@ -39,3 +39,23 @@ body {
 .leaflet-top {
   z-index: 0 !important;
 }
+
+.scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background: rgb(148, 159, 163);
+  border-radius: 4px;
+}
+
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #b3b3b3;
+  background: rgb(140, 161, 168);
+}
+
+/* Cambiamos el fondo cuando esté en active */
+.scrollbar::-webkit-scrollbar-thumb:active {
+  background: rgb(107, 126, 133);
+}

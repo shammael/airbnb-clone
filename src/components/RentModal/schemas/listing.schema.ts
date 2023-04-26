@@ -9,14 +9,18 @@ const listingSchema = yup.object().shape({
   roomCount: yup.number().required(),
   bathroomCount: yup.number().required(),
   imageSrc: yup.string().required(),
-  exchange: yup.object({
-    currency: yup.string().required(),
-    price: yup.number().required(),
-  }),
-  presentation: yup.object({
-    description: yup.string().required(),
-    title: yup.string().required(),
-  }),
+  exchange: yup
+    .object({
+      currency: yup.string().required(),
+      price: yup.number().required().min(1),
+    })
+    .required(),
+  presentation: yup
+    .object({
+      description: yup.string().required(),
+      title: yup.string().required(),
+    })
+    .required(),
 });
 
 export default listingSchema;

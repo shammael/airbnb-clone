@@ -50,31 +50,30 @@ const useCustomRentModal = (modalStore: RentModalStore) => {
         return onNext();
       }
       setIsLoading(true);
-      console.log({ values });
-      // axios
-      //   .post("/api/listings", {
-      //     category: values.category,
-      //     location: values.location,
-      //     imageSrc: values.imageSrc,
-      //     guestCount: values.guestCount,
-      //     roomCount: values.roomCount,
-      //     bathroomCount: values.bathroomCount,
-      //     exchange: {
-      //       currency: values.exchange.currency,
-      //       price: values.exchange.price,
-      //     },
-      //     info: values.info,
-      //   })
-      //   .then((resp) => {
-      //     toast.success("Listing created");
-      //     router.refresh();
-      //     actions.resetForm();
-      //     setStep(STEPS.CATEGORY);
-      //     modalStore.close();
-      //   })
-      //   .catch((err) => {
-      //     toast.error("An error have been occured");
-      //   });
+      axios
+        .post("/api/listings", {
+          category: values.category,
+          location: values.location,
+          imageSrc: values.imageSrc,
+          guestCount: values.guestCount,
+          roomCount: values.roomCount,
+          bathroomCount: values.bathroomCount,
+          exchange: {
+            currency: values.exchange.currency,
+            price: values.exchange.price,
+          },
+          presentation: values.presentation,
+        })
+        .then((resp) => {
+          toast.success("Listing created");
+          router.refresh();
+          actions.resetForm();
+          setStep(STEPS.CATEGORY);
+          modalStore.close();
+        })
+        .catch((err) => {
+          toast.error("An error have been occured");
+        });
       setIsLoading(false);
     },
   });

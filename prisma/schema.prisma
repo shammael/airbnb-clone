@@ -47,7 +47,6 @@ model Account {
 
 model Listing {
   id            String        @id @default(auto()) @map("_id") @db.ObjectId
-  description   String
   imageSrc      String
   createdAt     DateTime      @default(now())
   category      String
@@ -59,10 +58,17 @@ model Listing {
   userId        String        @db.ObjectId
   reservations  Reservation[]
   exchange      Exchange?
-  title         String
+  presentation  Presentation?
 
-  @@unique([userId, title])
   @@map("listings")
+}
+
+model Presentation {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String
+  listingId   String  @unique @db.ObjectId
+  listing     Listing @relation(fields: [listingId], references: [id])
 }
 
 model Location {
