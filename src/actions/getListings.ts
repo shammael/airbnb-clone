@@ -35,6 +35,17 @@ export default async function getListings() {
             latlng: true,
           },
         },
+        reservations: {
+          select: {
+            endDate: true,
+            id: true,
+            price: true,
+            startDate: true,
+          },
+        },
+        imageSrc: true,
+        guestCount: true,
+        roomCount: true,
       },
     });
 
