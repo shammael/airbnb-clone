@@ -21,6 +21,7 @@ export default async function Home() {
         {listings.map((listing) => {
           return (
             <ListingCard
+              //@ts-ignore
               user={currentUser}
               listing={{
                 ...listing,

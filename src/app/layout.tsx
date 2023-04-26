@@ -23,7 +23,7 @@ export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
-  session: any;
+  session: never;
 }) {
   const currentUser = await getCurentUser();
   return (

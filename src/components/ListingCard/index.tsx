@@ -17,7 +17,7 @@ interface Props {
   disabled?: boolean;
   actionLabel?: string;
   actionId?: string;
-  user?: User | null;
+  user?: User | null | undefined;
 }
 
 const ListingCard = ({
